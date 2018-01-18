@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Collatz_Conjecture
 {
@@ -13,10 +9,7 @@ namespace Collatz_Conjecture
         public static BigInteger Ask()
         {
             Console.WriteLine("Enter number:");
-            if (BigInteger.TryParse(Console.ReadLine(), out BigInteger num))
-            {
-
-            }
+            if (BigInteger.TryParse(Console.ReadLine(), out BigInteger num)) {}
             else
             {
                 Console.WriteLine("Bad number");
@@ -30,22 +23,19 @@ namespace Collatz_Conjecture
 
             Console.WriteLine("What you want to do?");
             Console.WriteLine("1. Check a number for being a solution");
-            Console.WriteLine("2. ");
 
-                int choice;
-                if (Int32.TryParse(Console.ReadLine(), out choice)) { }
+                if (Int32.TryParse(Console.ReadLine(), out int choice)) { }
                 else
                 {
                     Console.WriteLine("Bad number provided");
                 }
-
-            switch (choice)
+                switch (choice)
                 {
                     case 1:
                         StreamWriter writetext = new StreamWriter("output.txt");
                         int op = 0;
                         BigInteger num = Ask();
-                        while(!num.IsOne)
+                        while (!num.IsOne)
                         {
                             Console.WriteLine(op + ": " + num.ToString("R"));
                             if (num % 2 == 0)
@@ -57,15 +47,16 @@ namespace Collatz_Conjecture
                                 num = 3 * num + 1;
                             }
                             op++;
-                            
-                            writetext.WriteLine(op + ": " + num.ToString("R"));                            
+                            writetext.WriteLine(op + ": " + num.ToString("R"));
                         }
                         Console.WriteLine(op + ": 1");
                         Console.WriteLine($"Operations performed: {op}");
                         writetext.Close();
                         break;
+                    default:
+                        break;
                 }
-    
+
             }
         }
     }
