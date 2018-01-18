@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Collatz_Conjecture
 {
     class Program
-    {
-        public static Decimal Ask()
+    { 
+        public static BigInteger Ask()
         {
             Console.WriteLine("Enter number:");
-            if (Decimal.TryParse(Console.ReadLine(), out decimal num))
+            if (BigInteger.TryParse(Console.ReadLine(), out BigInteger num))
             {
 
             }
@@ -40,20 +42,27 @@ namespace Collatz_Conjecture
             switch (choice)
                 {
                     case 1:
-                        Decimal num = Ask();
-                        while(num >= 2)
+                        StreamWriter writetext = new StreamWriter("output.txt");
+                        int op = 0;
+                        BigInteger num = Ask();
+                        while(!num.IsOne)
                         {
-                        Console.WriteLine(num);
-                        if (num % 2 == 0)
-                        {
-                            num *= 0.5M;
+                            Console.WriteLine(op + ": " + num.ToString("R"));
+                            if (num % 2 == 0)
+                            {
+                                num = num / 2;
+                            }
+                            else
+                            {
+                                num = 3 * num + 1;
+                            }
+                            op++;
+                            
+                            writetext.WriteLine(op + ": " + num.ToString("R"));                            
                         }
-                        else
-                        {
-                            num = 3 * num + 1;
-                        }
-
-                        }
+                        Console.WriteLine(op + ": 1");
+                        Console.WriteLine($"Operations performed: {op}");
+                        writetext.Close();
                         break;
                 }
     
@@ -61,3 +70,4 @@ namespace Collatz_Conjecture
         }
     }
 }
+//41892739812790846718792364871235678162736476762763746736476467368746128734687162537684581756156536512786458176253876178263547865
